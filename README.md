@@ -1,4 +1,4 @@
-# Syfyfancam Downloader
+# Syfyfancam Downloader [![Build Status](https://travis-ci.org/jbilbo/syfyfancam-downloader.svg?branch=master)](https://travis-ci.org/jbilbo/syfyfancam-downloader)
 
 usage:
 
