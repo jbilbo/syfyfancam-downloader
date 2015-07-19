@@ -11,8 +11,7 @@ module SyfyfancamDownloader
 
     def download_files
       Dir.mkdir parser.personal_hash unless already_created
-      (1..100).each do |n|
-        url = parser.build_url(n)
+      parser.build_urls.each do |url|
         download_file(url)
       end
     end

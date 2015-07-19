@@ -1,7 +1,12 @@
 RSpec.describe SyfyfancamDownloader::Downloader do
   describe '#download_files' do
+    let(:urls) do
+      urls = []
+      100.times { urls << 'http://a.com/pic.png' }
+      urls
+    end
     let(:parser) do
-      double('parser', personal_hash: 'a', build_url: 'b', base_url: 'c')
+      double('parser', personal_hash: 'a', build_urls: urls, base_url: 'http://a.com/')
     end
     let(:output) { StringIO.new }
 

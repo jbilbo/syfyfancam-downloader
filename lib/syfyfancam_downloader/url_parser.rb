@@ -19,13 +19,22 @@ module SyfyfancamDownloader
       base_url.split('/').last
     end
 
+    def build_urls
+      urls = []
+      (1..100).each do |n|
+        urls << build_url(n)
+      end
+
+      urls
+    end
+
+    private
+
     def build_url(num)
       number = format('%03d', num)
 
       "#{base_url}#{number}.jpg"
     end
-
-    private
 
     def personal_hash?
       url.split('/').last.size == 12

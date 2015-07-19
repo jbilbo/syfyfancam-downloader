@@ -29,14 +29,17 @@ RSpec.describe SyfyfancamDownloader::URLParser do
       end
     end
 
-    describe '#build_url' do
-      it 'returns always a three digit number' do
-        allow(parser).to receive(:base_url).and_return('http://x.com/')
+    describe '#build_urls' do
+      it 'returns an array of 100 URLs' do
+        allow(parser).to receive(:base_url).and_return('http://a.com/')
 
-        expect(parser.build_url(0)).to eq('http://x.com/000.jpg')
-        expect(parser.build_url(1)).to eq('http://x.com/001.jpg')
-        expect(parser.build_url(35)).to eq('http://x.com/035.jpg')
-        expect(parser.build_url(100)).to eq('http://x.com/100.jpg')
+        urls = parser.build_urls
+
+        expect(urls.size).to eq(100)
+        expect(urls[0]).to eq('http://a.com/001.jpg')
+        expect(urls[1]).to eq('http://a.com/002.jpg')
+        expect(urls[35]).to eq('http://a.com/036.jpg')
+        expect(urls[99]).to eq('http://a.com/100.jpg')
       end
     end
   end
