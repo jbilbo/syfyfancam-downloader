@@ -26,21 +26,10 @@ module SyfyfancamDownloader
     end
 
     def build_urls
-      urls = []
-      (1..100).each do |n|
-        urls << build_url(n)
-      end
-
-      urls
+      (1..100).map { |i| "#{base_url}#{format('%03d', i)}.jpg" }
     end
 
     private
-
-    def build_url(num)
-      number = format('%03d', num)
-
-      "#{base_url}#{number}.jpg"
-    end
 
     def personal_hash?
       uri.to_s.split('/').last.size == 12

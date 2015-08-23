@@ -10,7 +10,7 @@ module SyfyfancamDownloader
     end
 
     def download_files
-      Dir.mkdir parser.personal_hash unless already_created
+      Dir.mkdir default_directory unless already_created
       parser.build_uris.each do |uri|
         download_file(uri)
       end
@@ -19,15 +19,20 @@ module SyfyfancamDownloader
     private
 
     def download_file(uri)
-      store_path = "#{parser.personal_hash}/#{uri.to_s.split('/').last}"
+      number = uri.to_s.split('/').last
+      store_path = "#{default_directory}/#{number}"
       output << "Downloading #{uri} to #{store_path}\n"
       File.open(store_path, 'wb') do |file|
         file << Net::HTTP.get(uri)
       end
     end
 
+    def default_directory
+      parser.personal_hash
+    end
+
     def already_created
-      File.exist?(parser.personal_hash) && File.directory?(parser.personal_hash)
+      File.exist?(default_directory) && File.directory?(default_directory)
     end
   end
 end
