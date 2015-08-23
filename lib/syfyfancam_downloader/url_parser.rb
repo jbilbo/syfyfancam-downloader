@@ -18,7 +18,7 @@ module SyfyfancamDownloader
     end
 
     def personal_hash
-      base_url.split('/').last
+      uri.to_s.split('/').last
     end
 
     def build_uris
@@ -32,7 +32,7 @@ module SyfyfancamDownloader
     private
 
     def personal_hash?
-      uri.to_s.split('/').last.size == 12
+      personal_hash && personal_hash.size == 12
     end
   end
 end

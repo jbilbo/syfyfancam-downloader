@@ -4,7 +4,7 @@ RSpec.describe SyfyfancamDownloader::URLParser do
     let(:html) do
       <<-EOS
       <html><head><title></title>
-      <meta property="og:image" content="https://g.gl/b4tYn1RX2wMQ/023.jpg" />
+      <meta property="og:image" content="http://d1fmy74dfqc2hp.cf.net/resources/footage/vE/oJt1Nd5BnboG/024.jpg" />
       </head><body></body></html>
       EOS
     end
@@ -17,14 +17,14 @@ RSpec.describe SyfyfancamDownloader::URLParser do
 
     describe '#personal_hash' do
       it 'returns the hash' do
-        expect(parser.personal_hash).to eq('b4tYn1RX2wMQ')
-        expect(Net::HTTP).to have_received(:get).once
+        expect(parser.personal_hash).to eq('ojt1nd5bnbog')
+        expect(Net::HTTP).to_not have_received(:get)
       end
     end
 
     describe '#base_url' do
       it 'returns the base url' do
-        expect(parser.base_url).to eq('https://g.gl/b4tYn1RX2wMQ/')
+        expect(parser.base_url).to eq('http://d1fmy74dfqc2hp.cf.net/resources/footage/vE/oJt1Nd5BnboG/')
         expect(Net::HTTP).to have_received(:get).once
       end
     end
