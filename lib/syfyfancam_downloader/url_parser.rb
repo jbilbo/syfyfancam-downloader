@@ -14,8 +14,7 @@ module SyfyfancamDownloader
     end
 
     def base_url
-      @doc ||= Nokogiri::HTML(Net::HTTP.get(uri))
-      @doc.at('meta[property="og:image"]')['content'][0..-8]
+      @base_url ||= Nokogiri::HTML(Net::HTTP.get(uri)).at('meta[property="og:image"]')['content'][0..-8]
     end
 
     def personal_hash
