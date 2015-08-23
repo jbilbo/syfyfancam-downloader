@@ -4,3 +4,6 @@ Style/Documentation:
 Lint/HandleExceptions:
   Exclude:
     - Rakefile
+
+Metrics/LineLength:
+  Max: 120
