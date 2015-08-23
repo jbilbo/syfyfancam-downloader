@@ -4,5 +4,5 @@
 usage:
 
 ```shell
-ruby bin/syfyfancam_downloader.rb http://www.syfyfancam.com/videos/ojt1nd5bnbog/
+ruby bin/syfyfancam_downloader http://www.syfyfancam.com/videos/ojt1nd5bnbog/
 ```
