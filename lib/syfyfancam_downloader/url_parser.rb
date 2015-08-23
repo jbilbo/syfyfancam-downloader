@@ -1,22 +1,29 @@
 require 'nokogiri'
-require 'open-uri'
+require 'uri'
+require 'net/http'
 
 module SyfyfancamDownloader
   class URLParser
-    attr_reader :url
+    attr_reader :uri
 
     def initialize(url)
-      @url = url
+      @uri = URI.parse(url)
       fail SyfyfancamDownloader::HELP_MSG unless personal_hash?
+    rescue URI::InvalidURIError => e
+      raise e, SyfyfancamDownloader::HELP_MSG
     end
 
     def base_url
-      @doc ||= Nokogiri::HTML(open(url))
+      @doc ||= Nokogiri::HTML(Net::HTTP.get(uri))
       @doc.at('meta[property="og:image"]')['content'][0..-8]
     end
 
     def personal_hash
       base_url.split('/').last
+    end
+
+    def build_uris
+      build_urls.map { |url| URI.parse(url) }
     end
 
     def build_urls
@@ -37,7 +44,7 @@ module SyfyfancamDownloader
     end
 
     def personal_hash?
-      url.split('/').last.size == 12
+      uri.to_s.split('/').last.size == 12
     end
   end
 end

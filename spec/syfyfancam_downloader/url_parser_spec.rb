@@ -12,20 +12,20 @@ RSpec.describe SyfyfancamDownloader::URLParser do
     subject(:parser) { described_class.new(url) }
 
     before do
-      allow(parser).to receive(:open).and_return(html)
+      allow(Net::HTTP).to receive(:get).with(parser.uri).and_return(html)
     end
 
     describe '#personal_hash' do
       it 'returns the hash' do
         expect(parser.personal_hash).to eq('b4tYn1RX2wMQ')
-        expect(parser).to have_received(:open).once
+        expect(Net::HTTP).to have_received(:get).once
       end
     end
 
     describe '#base_url' do
       it 'returns the base url' do
         expect(parser.base_url).to eq('https://g.gl/b4tYn1RX2wMQ/')
-        expect(parser).to have_received(:open).once
+        expect(Net::HTTP).to have_received(:get).once
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe SyfyfancamDownloader::URLParser do
     end
   end
 
-  context 'Not valid URL' do
+  context 'Wrong URL' do
     let(:url) { 'http://www.nintendo.co.jp/' }
 
     describe '#initialize' do
@@ -55,6 +55,21 @@ RSpec.describe SyfyfancamDownloader::URLParser do
       it 'outputs a help message' do
         expect { described_class.new(url) }
           .to raise_error(SyfyfancamDownloader::HELP_MSG)
+      end
+    end
+
+    context 'Not valid URL' do
+      let(:url) { '|cat /etc/passwd' }
+
+      describe '#initialize' do
+        it 'fails to create an instance' do
+          expect { described_class.new(url) }.to raise_error(URI::InvalidURIError)
+        end
+
+        it 'outputs a help message' do
+          expect { described_class.new(url) }
+            .to raise_error(SyfyfancamDownloader::HELP_MSG)
+        end
       end
     end
   end

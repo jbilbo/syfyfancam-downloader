@@ -1,4 +1,4 @@
-require 'open-uri'
+require 'net/http'
 
 module SyfyfancamDownloader
   class Downloader
@@ -11,18 +11,18 @@ module SyfyfancamDownloader
 
     def download_files
       Dir.mkdir parser.personal_hash unless already_created
-      parser.build_urls.each do |url|
-        download_file(url)
+      parser.build_uris.each do |uri|
+        download_file(uri)
       end
     end
 
     private
 
-    def download_file(url)
-      store_path = "#{parser.personal_hash}/#{url.split('/').last}"
-      output << "Downloading #{url} to #{store_path}\n"
+    def download_file(uri)
+      store_path = "#{parser.personal_hash}/#{uri.to_s.split('/').last}"
+      output << "Downloading #{uri} to #{store_path}\n"
       File.open(store_path, 'wb') do |file|
-        file << open(url).read
+        file << Net::HTTP.get(uri)
       end
     end
 
