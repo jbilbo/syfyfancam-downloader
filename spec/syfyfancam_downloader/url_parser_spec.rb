@@ -42,6 +42,21 @@ RSpec.describe SyfyfancamDownloader::URLParser do
         expect(urls[99]).to eq('http://a.com/100.jpg')
       end
     end
+
+    describe '#build_uris' do
+      it 'returns an array of 100 URIs' do
+        allow(parser).to receive(:base_url).and_return('http://a.com/')
+
+        uris = parser.build_uris
+
+        expect(uris.size).to eq(100)
+        expect(uris[0]).to be_a(URI)
+        expect(uris[0].to_s).to eq('http://a.com/001.jpg')
+        expect(uris[1].to_s).to eq('http://a.com/002.jpg')
+        expect(uris[35].to_s).to eq('http://a.com/036.jpg')
+        expect(uris[99].to_s).to eq('http://a.com/100.jpg')
+      end
+    end
   end
 
   context 'Wrong URL' do
