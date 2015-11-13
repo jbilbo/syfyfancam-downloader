@@ -1,21 +1,23 @@
 RSpec.describe SyfyfancamDownloader::Downloader do
   describe '#download_files' do
-    let(:uri) { URI.parse('http://a.com/pic.png') }
-    let(:uris) do
-      uris = []
-      100.times { uris << uri }
-      uris
+    let(:url) { 'http://a.com/pic.png' }
+    let(:urls) do
+      urls = []
+      100.times { urls << url }
+      urls
     end
     let(:parser) do
-      double('parser', personal_hash: 'a', build_uris: uris, base_url: 'http://a.com/')
+      double('parser', personal_hash: 'a', images: urls)
     end
     let(:output) { StringIO.new }
 
-    subject(:downloader) { described_class.new(parser: parser, output: output) }
+    subject(:downloader) { described_class.new(url: url, output: output) }
 
     before do
       allow(Dir).to receive(:mkdir)
       allow(File).to receive(:open)
+
+      allow(Syfyfancam::URL).to receive(:new).and_return(parser)
     end
 
     it 'creates a directory to download the files' do

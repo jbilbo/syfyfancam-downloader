@@ -1,18 +1,18 @@
-require 'net/http'
+require 'syfyfancam'
 
 module SyfyfancamDownloader
   class Downloader
     attr_reader :parser, :output
 
-    def initialize(parser:, output: $stdout)
-      @parser = parser
+    def initialize(url:, output: $stdout)
+      @parser = Syfyfancam::URL.new(url)
       @output = output
     end
 
     def download_files
       Dir.mkdir default_directory unless already_created
-      parser.build_uris.each do |uri|
-        download_file(uri)
+      parser.images.each do |url|
+        download_file(URI.parse(url))
       end
     end
 
