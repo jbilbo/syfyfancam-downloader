@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe SyfyfancamDownloader::Downloader do
   describe '#download_files' do
     let(:url) { 'http://a.com/pic.png' }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe SyfyfancamDownloader::CLI do
   let(:downloader) { double('downloader') }
   let(:parser) { double('parser', personal_hash: 'b') }

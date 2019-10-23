@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/syfyfancam_downloader'
 
 RSpec.configure do |config|

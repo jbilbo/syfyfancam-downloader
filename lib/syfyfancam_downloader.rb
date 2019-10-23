@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'syfyfancam_downloader/cli'
 require_relative 'syfyfancam_downloader/downloader'
 
