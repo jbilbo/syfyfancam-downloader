@@ -6,5 +6,4 @@ group :test do
   gem 'rake', '~> 10.4'
   gem 'rspec', '~> 3.2'
   gem 'rubocop', '~> 0.48'
-  gem 'codeclimate-test-reporter', '~> 0.4', require: nil
 end
