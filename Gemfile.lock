@@ -3,11 +3,9 @@ GEM
   specs:
     ast (2.4.0)
     diff-lcs (1.2.5)
-    docile (1.1.5)
-    json (1.8.3)
-    mini_portile (0.6.2)
-    nokogiri (1.6.6.4)
-      mini_portile (~> 0.6.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
     powerpack (0.1.2)
@@ -34,13 +32,8 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.10.1)
-    simplecov (0.10.0)
-      docile (~> 1.1.0)
-      json (~> 1.8)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
-    syfyfancam (0.1.1)
-      nokogiri (~> 1.6.6.4)
+    syfyfancam (0.2.0)
+      nokogiri (~> 1.6)
     unicode-display_width (1.6.0)
 
 PLATFORMS
@@ -50,7 +43,7 @@ DEPENDENCIES
   rake (~> 10.4)
   rspec (~> 3.2)
   rubocop (~> 0.48)
-  syfyfancam (~> 0.1.1)
+  syfyfancam
 
 BUNDLED WITH
-   1.10.6
+   1.17.2
